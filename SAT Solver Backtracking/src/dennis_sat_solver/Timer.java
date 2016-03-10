@@ -1,4 +1,4 @@
-package src_Tucker.sat_solver2;
+package dennis_sat_solver;
 
 /**
  * This class provides a simple mechanism to time a computation
