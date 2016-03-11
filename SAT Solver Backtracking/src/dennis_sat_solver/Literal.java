@@ -1,5 +1,4 @@
 package dennis_sat_solver;
-
 /**
  * Write a description of class Literal here.
  * 
@@ -8,7 +7,6 @@ package dennis_sat_solver;
  * @author (Dennis Klauder) 
  * @version (2/12/16)
  */
- 
 public class Literal
 {
     // instance variables - replace the example below with your own
