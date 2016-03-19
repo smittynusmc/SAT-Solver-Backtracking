@@ -1,22 +1,23 @@
 package umair_sat_solver;
 
-
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Scanner;
 
 /**
  * This class defines a formula which is a conjunction of clauses.
  * 
- * @author
+ * @author Dennis Klauder
+ * @author Adam Tucker
+ * @author Umair Chaudhry
+ * 
  */
-public class Formula {
+public class Formula 
+{
     
     // list of clauses in CNF 
     private List<Clause> clauses;
@@ -27,38 +28,73 @@ public class Formula {
     // number of clauses in the formula
     int numClauses;
     
-    public Formula(){
+    /**
+     * This constructor takes no arguments
+     */
+    public Formula()
+    {
         clauses = new ArrayList<Clause>();
         numVariables = 0;
     }
 
-    public int getNumVariables() {
+    /**
+     * This method returns the number of variables in the formula
+     * @return the number of variables
+     */
+    public int getNumVariables() 
+    {
         return numVariables;
     }
 
-    public void setNumVariables(int numVariables) {
+    
+    /**
+     * This method sets the number of variables in the formula
+     * @param numVariables number of variables
+     * @return void
+     */
+    public void setNumVariables(int numVariables) 
+    {
         this.numVariables = numVariables;
     }
 
-    public int getNumClauses() {
+    /**
+     * This method returns the number of clauses in the formula
+     * @return the number of clauses
+     */
+    public int getNumClauses() 
+    {
         return numClauses;
     }
 
-    public void setNumClauses(int numClauses) {
+    
+    /**
+     * This method sets the number of clauses in the formula
+     * @param numClauses number of clauses
+     * @return void
+     */
+    public void setNumClauses(int numClauses) 
+    {
         this.numClauses = numClauses;
     }
     
     
-    // Load and return a formula from a file specification
-    public static Formula readFromFile(String string){
+    /**
+     * This method loads and returns a formula from a file specification
+     * @param filename name of the file containing the formula
+     * @return the Formula
+     */
+    public static Formula readFromFile(String filename)
+    {
         BufferedReader br = null;
         String line = null;
         int numVars, numClauses, var;
         Formula f = new Formula();
         try {
-            br = new BufferedReader(new FileReader(string));
+            br = new BufferedReader(new FileReader(filename));
             while((line = br.readLine()) != null){          
                 if(line.startsWith("c"))
+                    continue;
+                if(line.length() == 0)
                     continue;
                 if(line.startsWith("p cnf")){
                     line = line.replaceAll("\\s+", " ");
@@ -83,6 +119,7 @@ public class Formula {
                         }
                     }
                     f.addClause(c);
+                    sc.close();
                 }
             }
             br.close();
@@ -94,14 +131,24 @@ public class Formula {
         return f;
     }
     
-    // Add a clause to this formula
-    public void addClause(Clause c){
+    /**
+     * This method adds a clause to this formula
+     * @param c a Clause
+     * @return void
+     */
+    public void addClause(Clause c)
+    {
         clauses.add(c);
     }
     
-    // Evaluate this formula based on given truth value assignments of variables
-    // passed as a boolean string
-    public boolean evaluate(String boolAssignment){
+    /**
+     * This method evaluates this formula based on given truth value assignments of variables 
+     * passed as a boolean string
+     * @param boolAssignment a String
+     * @return a boolean value
+     */
+    public boolean evaluate(String boolAssignment)
+    {
         for(Clause c: clauses){
             if(!c.evaluate(boolAssignment))
                 return false;
@@ -109,8 +156,12 @@ public class Formula {
         return true;
     }
     
-    @Override
-    public String toString(){
+    /**
+     * This method returns the String representation of the formula
+     * @return a String
+     */
+    public String toString()
+    {
         String s ="("+clauses.get(0).toString();
         for(int i=1; i < clauses.size(); i++){
             s += " and " + clauses.get(i).toString();
@@ -121,3 +172,4 @@ public class Formula {
     
     
 }
+
