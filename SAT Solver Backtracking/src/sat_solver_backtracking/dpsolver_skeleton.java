@@ -1,5 +1,7 @@
 package sat_solver_backtracking;
 
+import dennis_sat_solver.Formula;
+
 /**
  * 
  * This material is based upon work supported by 
@@ -26,10 +28,6 @@ package sat_solver_backtracking;
 
 public class dpsolver_skeleton {
 	
-	// Students will define class Formula, possibly as 
-	// a separate public class
-	private class Formula { }
-
 	Formula formula;
 
 	// Read the provided input formula
@@ -149,6 +147,8 @@ public class dpsolver_skeleton {
 		
 		// Insert timing code here...
 		new dpsolver_skeleton().solve ( args[0] );
+		
+		
 
 	}
 
