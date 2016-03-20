@@ -121,4 +121,9 @@ public class Formula
 		result += " }";
 		return result;
 	}
+
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

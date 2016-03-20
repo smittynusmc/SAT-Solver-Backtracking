@@ -12,6 +12,8 @@ public class Clause
 {
     List <Literal> values;
     
+    Stack <Literal> lastRemoved;
+    
     /**
      * Constructor for objects of class State
      */
@@ -33,11 +35,6 @@ public class Clause
         return values.get(name-1).get();
     }
 
-    public List  getAll()
-    {
-        return values;
-    }
-
     public void add (Literal input)
     {
         values.add(input);
@@ -48,6 +45,16 @@ public class Clause
         values.clear();
         values.addAll(list);
     }
+    
+    /**
+     * Removes a literal from the collection of literals
+     * and saves the last values removed on the stack
+     * @param index
+     */
+    public void remove (int index) {
+    	lastRemoved.push(values.remove(index));
+    }
+    
 
     /**
      * This will evaluate the Clause against the state contained in the State class used as a parameter
@@ -72,7 +79,7 @@ public class Clause
      * 
      * @param    a list 
      * @return   boolean response if the state will satisfy the clause
-     */
+     
     public boolean evaluate(List state)
     {
         boolean sucess = false;
@@ -86,6 +93,7 @@ public class Clause
         }
         return sucess;
     }
+    */
 
     /**
      * toString

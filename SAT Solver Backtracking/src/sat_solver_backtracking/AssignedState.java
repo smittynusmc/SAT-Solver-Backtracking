@@ -17,6 +17,14 @@ public class AssignedState implements State
 	{  
 		this.currState = state;
 	}
+	
+	public boolean isCurrState() {
+		return currState;
+	}
+
+	public void setCurrState(boolean currState) {
+		this.currState = currState;
+	}
 
 	public EmptyState reset()
 	{

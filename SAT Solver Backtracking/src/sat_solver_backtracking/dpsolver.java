@@ -1,20 +1,11 @@
 package sat_solver_backtracking;
 
-import dennis_sat_solver.Formula;
-
 /**
  * 
  * This material is based upon work supported by 
  * the National Science Foundation under Grant No. 1140753.
  * 
- */
-
-/**
- * This is a test
- */
-
-/**
- * This class is a skeleton for a backtracking SAT solver
+ * This class is for a backtracking SAT solver
  * It may be used as a handout to explain backtracking and 
  * provide a starting point for students to build 
  * their respective backtracking solvers
@@ -26,7 +17,7 @@ import dennis_sat_solver.Formula;
  */
 
 
-public class dpsolver_skeleton {
+public class dpsolver {
 	
 	Formula formula;
 
@@ -45,8 +36,7 @@ public class dpsolver_skeleton {
 	
 	// Returns true if the formula has no clauses left, false otherwise
 	boolean isEmpty ( Formula f ) {
-		// Stub
-		return false;
+		return f.isEmpty();
 		
 	}
 	
@@ -146,7 +136,7 @@ public class dpsolver_skeleton {
 		}
 		
 		// Insert timing code here...
-		new dpsolver_skeleton().solve ( args[0] );
+		new dpsolver().solve ( args[0] );
 		
 		
 

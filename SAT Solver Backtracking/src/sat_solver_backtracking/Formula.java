@@ -23,6 +23,9 @@ public class Formula {
     // The current partial or completed state for this formula
     private List <State> states;
     
+    //Stack of index for backtracking
+    Stack <Integer> lastIndex;
+    
     /**
      * This constructor takes no arguments
      */
@@ -135,5 +138,9 @@ public class Formula {
     public void addClause(Clause c)
     {
         clauses.add(c);
+    }
+    
+    public boolean isEmpty () {
+    	return clauses.isEmpty();
     }
 }
