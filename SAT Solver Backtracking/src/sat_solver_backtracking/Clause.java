@@ -13,9 +13,6 @@ public class Clause
 	// Collections of literals that are either positive or negative
     List <Literal> values;
     
-    // Stack for the literals the could be removed
-    Stack <Literal> lastRemoved;
-    
     /**
      * Constructor for objects of class State
      */
@@ -46,15 +43,6 @@ public class Clause
     {
         values.clear();
         values.addAll(list);
-    }
-    
-    /**
-     * Removes a literal from the collection of literals
-     * and saves the last values removed on the stack
-     * @param index
-     */
-    public void remove (int index) {
-    	lastRemoved.push(values.remove(index));
     }
     
     /**
