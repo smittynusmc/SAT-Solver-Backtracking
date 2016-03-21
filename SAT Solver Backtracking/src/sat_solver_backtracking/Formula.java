@@ -1,9 +1,5 @@
 package sat_solver_backtracking;
 
-/**
- * hi MY NAME IS UMAIR
- */
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
