@@ -14,17 +14,21 @@ public class Formula {
     // list of clauses in CNF 
     private List<Clause> clauses;
     
+    // The current partial or completed state for this formula
+    private List <State> states;
+    
+    //Stack of index for backtracking
+    Stack <Integer> lastIndex;
+    
     // number of variables in the formula
     int numVariables;
     
     // number of clauses in the formula
     int numClauses;
     
-    // The current partial or completed state for this formula
-    private List <State> states;
+    //True if any clause is empty
+    boolean hasEmptyClause = false;
     
-    //Stack of index for backtracking
-    Stack <Integer> lastIndex;
     
     /**
      * This constructor takes no arguments
@@ -142,5 +146,12 @@ public class Formula {
     
     public boolean isEmpty () {
     	return clauses.isEmpty();
+    }
+    
+    public void removeLiteral (Clause c, int index) {
+    	c.remove(index);
+    	if (c.values.isEmpty()) {
+    		hasEmptyClause = true;
+    	}
     }
 }

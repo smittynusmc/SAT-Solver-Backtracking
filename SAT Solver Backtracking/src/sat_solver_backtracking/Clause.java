@@ -9,9 +9,11 @@ import java.util.*;
  * @versionBackTracking (03-19-16)
  */
 public class Clause
-{
+{	
+	// Collections of literals that are either positive or negative
     List <Literal> values;
     
+    // Stack for the literals the could be removed
     Stack <Literal> lastRemoved;
     
     /**
@@ -55,7 +57,6 @@ public class Clause
     	lastRemoved.push(values.remove(index));
     }
     
-
     /**
      * This will evaluate the Clause against the state contained in the State class used as a parameter
      * 
@@ -95,7 +96,7 @@ public class Clause
     }
     */
 
-    /**
+	/**
      * toString
      * 
      * @return     the contents of the List in a String format
