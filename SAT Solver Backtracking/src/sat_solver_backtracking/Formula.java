@@ -16,7 +16,7 @@ public class Formula {
     private List<Clause> clauses;
     
     // The current partial or completed state for this formula
-    private List <State> states;
+    private List <Literal> states;
     
     //Stack of index for backtracking
     Stack <Integer> lastIndex;
@@ -37,7 +37,7 @@ public class Formula {
     public Formula()
     {
         clauses = new ArrayList<Clause>();
-        states = new ArrayList <State> ();
+        states = new ArrayList <Literal> ();
         numVariables = 0;
     }
 
