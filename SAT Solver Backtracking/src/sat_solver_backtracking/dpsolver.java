@@ -23,15 +23,13 @@ public class dpsolver {
 
 	// Read the provided input formula
 	void readFormula ( String fileName ) {
-		// Stub
-		formula = null;
+		formula = Formula.readFromFile(fileName);
 		
 	}
 
 	// Returns true if the formula has an empty clause, false otherwise
 	boolean hasEmptyClause ( Formula f ) {
-		// Stub
-		return false;
+		return f.hasEmptyClause;
 	}
 	
 	// Returns true if the formula has no clauses left, false otherwise
