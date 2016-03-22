@@ -73,6 +73,15 @@ public class Clause
 		}
 	}
 
+	/**
+	 * Returns the size of the clause as an integer.
+	 * 
+	 * @return	integer.
+	 */
+	public int size()
+	{
+		return clauseValues.size();		
+	}
 
 	/**
 	 * toString
