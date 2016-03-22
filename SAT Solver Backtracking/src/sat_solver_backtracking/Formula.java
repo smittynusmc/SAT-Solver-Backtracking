@@ -183,5 +183,14 @@ public class Formula {
 		return f;
 	}
 
-
+	public List<Literal> getSuccessState() {
+		return successState;
+	}
+	
+	public void removeLiteral (Formula f, int var) {
+		Literal temp = new Literal (var);
+		for (Clause myClauses: formulaList) {
+			myClauses.evaluateClause(temp);
+		}
+	}
 }
