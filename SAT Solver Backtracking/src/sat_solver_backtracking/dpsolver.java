@@ -6,12 +6,12 @@ package sat_solver_backtracking;
  * the National Science Foundation under Grant No. 1140753.
  * 
  * This class is for a backtracking SAT solver
- * It may be used as a handout to explain backtracking and 
- * provide a starting point for students to build 
- * their respective backtracking solvers
  * 
  * @author Dr. Andrea Lobo
- * @author Dr. Ganesh R. Baliga 
+ * @author Dr. Ganesh R. Baliga
+ * @author Adam Tucker
+ * @author Dennis Klauder
+ * @author Umair Chaundry 
  * 
  *
  */
