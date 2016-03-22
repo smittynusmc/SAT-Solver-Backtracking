@@ -5,98 +5,88 @@ import java.util.*;
  * Write a description of class Clause here.
  * 
  * @author (Dennis Klauder) 
- * @author (ADam Tucker)
+ * @author (Adam Tucker)
  * @versionBackTracking (03-19-16)
  */
 public class Clause
 {	
 	// Collections of literals that are either positive or negative
-    List <Literal> values;
-    
-    /**
-     * Constructor for objects of class State
-     */
-    public Clause()
-    {  
-        values = new ArrayList<Literal>(30);
-
-    }
-
-    public Literal get(int name)
-    {
-        if(name >= values.size())
-            return null;
-        return values.get(name-1);
-    }
-
-    public boolean getValue(int name)
-    {
-        return values.get(name-1).get();
-    }
-
-    public void add (Literal input)
-    {
-        values.add(input);
-    }
-
-    public void addList(List<Literal> list)
-    {
-        values.clear();
-        values.addAll(list);
-    }
-    
-    /**
-     * This will evaluate the Clause against the state contained in the State class used as a parameter
-     * 
-     * @param    a State class 
-     * @return   boolean response if the state will satisfy the clause
-     */
-    //public boolean evaluate(AssignedState state)
-    //{
-    //    boolean sucess = false;
-    //    int i=0;
-    //    while(i<values.size()&&(!sucess))
-    //    {	
-    //        sucess=state.checkValue(values.get(i));
-    //        i++;
-    //    }
-    //    return sucess;
-    //}
-
-    /**
-     * This will evaluate the Clause against the state contained in the list used as a parameter
-     * 
-     * @param    a list 
-     * @return   boolean response if the state will satisfy the clause
-     
-    public boolean evaluate(List state)
-    {
-        boolean sucess = false;
-        int i=0;
-        while(i<values.size()&&(!sucess))
-        {
-        	System.out.println(i);
-            Literal test = values.get(i);
-            sucess = state.get((test.getName())-1).equals(test);
-            i++;
-        }
-        return sucess;
-    }
-    */
+	List <Literal> clauseValues;
 
 	/**
-     * toString
-     * 
-     * @return     the contents of the List in a String format
-     */
-    public String toString()
-    {
-        String result = "{ ";
-        for (int i=0;i<values.size()-1;i++)
-        {
-            result += values.get(i) + " or ";
-        }
-        result += values.get(values.size()-1)+" }";
-        return result;
-    }
+	 * Constructor for objects of class State
+	 */
+	public Clause()
+	{  
+		clauseValues = new ArrayList<Literal>(30);
+	}
+
+	/**
+	 * Adds one literal into the existing Array of Literals
+	 * 
+	 * @param input
+	 */
+	public void add (Literal input)
+	{
+		clauseValues.add(input);
+	}
+
+	/**
+	 * Adds an entire list of Literals as a clause
+	 * 
+	 * @param clauseList
+	 */
+	public void addList(List<Literal> clauseList)
+	{
+		clauseValues.clear();
+		clauseValues.addAll(clauseList);
+	}
+
+	/**
+	 * This will evaluate the Clause against the Literal provided
+	 * 
+	 * @param    a Literal object 
+	 * @return   a List of Literals still contained in the clause. -
+	 * 			- null if clause is satisfied.
+	 */
+	public List<Literal> evaluateClause(Literal workingVar)
+	{
+		//create a duplicate list to return with modification
+		List <Literal> returnClause=clauseValues;
+		//check for Literal of opposite value & remove if present
+		Literal removeLit = workingVar.changeValue();
+		int index = returnClause.indexOf(removeLit);
+		if(index>0)
+		{
+			returnClause.remove(index);
+			return returnClause;
+		}
+		//check to see if Literal will satisfy Clause
+		if (returnClause.contains(workingVar))
+		{
+			return null;
+		}
+		else 
+		{
+			//return unchanged list since Literal named was not present
+			return returnClause;
+		}
+	}
+
+
+	/**
+	 * toString
+	 * 
+	 * @return     the contents of the List in a String format
+	 */
+	public String toString()
+	{
+		String result = "{ ";
+		for (int i=0;i<clauseValues.size()-1;i++)
+		{
+			result += clauseValues.get(i) + " or ";
+		}
+		result += clauseValues.get(clauseValues.size()-1)+" }";
+		return result;
+	}
 }

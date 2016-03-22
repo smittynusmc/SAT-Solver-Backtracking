@@ -9,87 +9,100 @@ package sat_solver_backtracking;
  */
 public class Literal
 {
-    // instance variables - replace the example below with your own
-    private boolean value;
-    private int name;
+	// instance variables - replace the example below with your own
+	private boolean value;
+	private int name;
 
-    /**
-     *Default Constructor for objects of class Literal
-     */
-    //     public Literal(String nameGiven)
-    //     {
-    //         value = true;
-    //         name = nameGiven;
-    //     }
+	/**
+	 *Default Constructor for objects of class Literal
+	 */
+	//     public Literal(String nameGiven)
+	//     {
+	//         value = true;
+	//         name = nameGiven;
+	//     }
 
-    public Literal(int nameGiven, boolean valueGiven)
-    {
-        value = valueGiven;
-        name = nameGiven;
-    }
+	public Literal(int nameGiven, boolean valueGiven)
+	{
+		value = valueGiven;
+		name = Math.abs(nameGiven);
+	}
 
-    public Literal (int input)
-    {
-        if (input <0)
-        {
-            value = false;
-            input *= -1;
-        }
-        else
-            value = true;
-        name = input;
-    }
+	public Literal (int input)
+	{
+		if (input <0)
+		{
+			value = false;
+			input *= -1;
+		}
+		else
+		{
+			value = true;
+		}
+		name = input;
+	}
 
-    /**
-     * @return     the boolean value of the Literal
-     */
-    public boolean get()
-    {
-        return value;
-    }
+	/**
+	 * @return     the boolean value of the Literal
+	 */
+	public boolean get()
+	{
+		return value;
+	}
 	/**
 	 *	@return		the name String assigned to the Literal
 	 */
-    public int getName()
-    {
-        return name;
-    }
-	
+	public int getName()
+	{
+		return name;
+	}
+
 	/**
 	 *	@parameter		allows the value of the Literal to be changed.
 	 */
-    public void set(boolean newValue)
-    {
-        value = newValue;
-    }
+	public void set(boolean newValue)
+	{
+		value = newValue;
+	}
+
+	protected Literal changeValue()
+	{
+		if(value)
+			value=false;
+		else
+		{
+			value=true;
+		}
+		return this;
+	}
 
 	/**
 	 *	@return		the value of the Literal as a String
 	 */
-    public String toString()
-    {
-        String result=name+" ";
-        if (value)
-            result += "true";
-        else 
-            result += "false";
-        return result;
-    }
+	public String toString()
+	{
+		String result=name+" ";
+		if (value)
+			result += "true";
+		else 
+			result += "false";
+		return result;
+	}
 
-    /** @return true only if this List is equal to the 
-     * parameter, other 
-     */
-    public boolean equals (Object other)
-    {
-        if(!(other instanceof Literal))
-        {
-            return false;
-        }
-        Literal test = (Literal)other;
-        if(!(value==test.get()&&name == (test.getName())))
-        {
-            return false;
-        }
-        return true;
-    }
+	/** @return true only if this Literal is equal to the 
+	 * parameter, other 
+	 */
+	public boolean equals (Object other)
+	{
+		if(!(other instanceof Literal))
+		{
+			return false;
+		}
+		Literal test = (Literal)other;
+		if(name == test.getName()&&value==test.get())
+		{
+			return true;
+		}
+		return false;
+	}
 }
