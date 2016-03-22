@@ -49,62 +49,6 @@ public class Formula {
 		minClauseIndex=-1;
 	}
 
-
-
-
-	/**
-	 * This method returns the number of variables in the formula
-	 * @return the number of variables
-	 */
-	public int getNumVariables() 
-	{
-		return numVariables;
-		//use for keeping track of index?
-	}
-
-
-	/**
-	 * This method sets the number of variables in the formula
-	 * @param numVariables number of variables
-	 * @return void
-	 */
-	public void setNumVariables(int numVariables) 
-	{
-		this.numVariables = numVariables;
-	}
-
-	/**
-	 * This method returns the number of clauses in the formula
-	 * @return the number of clauses
-	 */
-	public int getNumClauses() 
-	{
-		return numClauses;
-	}
-
-
-	/**
-	 * This method sets the number of clauses in the formula
-	 * @param numClauses number of clauses
-	 * @return void
-	 */
-	//public void setNumClauses(int numClauses) 
-	//{
-	//	this.numClauses = numClauses;
-	//}
-
-
-
-	public int getLastIndex() {
-		return lastIndex;
-	}
-
-	public void setLastIndex(int lastIndex) {
-		this.lastIndex = lastIndex;
-	}
-
-
-
 	/**
 	 * This method adds a clause to this formula
 	 * @param c a Clause
@@ -125,9 +69,59 @@ public class Formula {
 
 	}
 
+	
 	public boolean isEmpty () {
 		return formulaList.isEmpty();
 	}
+
+	/**
+	 * This method returns the number of variables in the formula
+	 * @return the number of variables
+	 */
+	public int getNumVariables() 
+	{
+		return numVariables;
+		//use for keeping track of index?
+	}
+
+	/**
+	 * This method sets the number of variables in the formula
+	 * @param numVariables number of variables
+	 * @return void
+	 */
+	public void setNumVariables(int numVariables) 
+	{
+		this.numVariables = numVariables;
+	}
+
+	/**
+	 * This method returns the number of clauses in the formula
+	 * @return the number of clauses
+	 */
+	public int getNumClauses() 
+	{
+		return numClauses;
+	}
+
+	/**
+	 * This method sets the number of clauses in the formula
+	 * @param numClauses number of clauses
+	 * @return void
+	 */
+	//public void setNumClauses(int numClauses) 
+	//{
+	//	this.numClauses = numClauses;
+	//}
+
+	public int getLastIndex() {
+		return lastIndex;
+	}
+
+	public void setLastIndex(int lastIndex) {
+		this.lastIndex = lastIndex;
+	}
+
+
 
 
 	/**
