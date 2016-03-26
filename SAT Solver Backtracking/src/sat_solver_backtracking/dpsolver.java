@@ -20,23 +20,23 @@ package sat_solver_backtracking;
 public class dpsolver {
 
 	Formula formula;
-
 	// Read the provided input formula
 	void readFormula ( String fileName ) {
 		formula = Formula.readFromFile(fileName);
-
 	}
-
+/*
 	// Returns true if the formula has an empty clause, false otherwise
+	//this is included in the Formula Class
 	boolean hasEmptyClause ( Formula f ) {
 		return f.hasEmptyClause;
 	}
 
 	// Returns true if the formula has no clauses left, false otherwise
+	//this is included in the Formula Class
 	boolean isEmpty ( Formula f ) {
 		return f.isEmpty();
-
 	}
+	*/
 
 	// Return branch variable.
 	int selectBranchVar ( Formula f ) {
@@ -50,11 +50,11 @@ public class dpsolver {
 		// Else the new literal will be false and negative
 		if (tf) {
 			f.getSuccessState().set(var, new Literal (var));
-			f.removeLiteral(f, var);
+			//f.removeLiteral(f, var);
 		}
 		else {
 			f.getSuccessState().set(var, new Literal (-var));
-			f.removeLiteral(f, -var);
+			//f.removeLiteral(f, -var);
 		}
 
 	}
@@ -71,7 +71,7 @@ public class dpsolver {
 		System.out.println ( "Formula is satisfiable");
 
 		// Print satisfying assignment
-
+		System.out.println(f.getSuccessState());
 	}
 
 	// Formula is unsatisfiable
@@ -96,9 +96,9 @@ public class dpsolver {
 	boolean dp ( Formula formula ) {
 
 		Formula child = formula;
-		if (isEmpty(child)) // First base case: solution found
+		if (child.isEmpty()) // First base case: solution found
 			return true;
-		else if (hasEmptyClause (child)) // Second base case: dead end found
+		else if (child.hasEmptyClause) // Second base case: dead end found
 			return false;
 		else {
 

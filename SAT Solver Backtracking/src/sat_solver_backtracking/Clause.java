@@ -49,28 +49,29 @@ public class Clause
 	 * @return   a List of Literals still contained in the clause. -
 	 * 			- null if clause is satisfied.
 	 */
-	public List<Literal> evaluateClause(Literal workingVar)
+	public Clause evaluateClause(Literal workingVar)
 	{
 		//create a duplicate list to return with modification
-		List <Literal> returnClause=clauseValues;
-		//check for Literal of opposite value & remove if present
+		List <Literal> testList=clauseValues;
+		
+		//create blank clause to return
+		Clause returnClause = new Clause();
+		
+		//check list for Literal of opposite value & remove if present
 		Literal removeLit = workingVar.changeValue();
-		int index = returnClause.indexOf(removeLit);
+		int index = testList.indexOf(removeLit);
 		if(index>0)
 		{
-			returnClause.remove(index);
-			return returnClause;
+			testList.remove(index);
 		}
 		//check to see if Literal will satisfy Clause
-		if (returnClause.contains(workingVar))
+		if (testList.contains(workingVar))
 		{
 			return null;
 		}
-		else 
-		{
-			//return unchanged list since Literal named was not present
-			return returnClause;
-		}
+		//saves new modified list to returnClause
+		returnClause.addList(testList);
+		return returnClause;
 	}
 
 	/**

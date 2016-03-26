@@ -5,12 +5,32 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Formula {
 
+/*
+//constructor
+formulaList = new ArrayList<Clause>(500);
+successState = new ArrayList <Literal> (500);
+numVariables = 0; //not sure how to use
+//automatic minClauseSize=Integer.MAX_VALUE;
+//automatic	minClauseIndex=-1;
+
+//variables
+private List<Clause> formulaList;  //yes
+private List <Literal> successState;  //yes
+***** int lastIndex; //i think so, use to set literals for processing
+int numVariables; //I think this is currently unused
+int numClauses; //I think method is set to use formula size.
+boolean hasEmptyClause = false; //auto changed while adding clauses
+private int minClauseSize;  //auto changed while adding clauses
+private int minClauseIndex;  //auto changed while adding clauses
+ */
+
+public class Formula {
 
 	// list of clauses in CNF 
 	private List<Clause> formulaList;
@@ -69,7 +89,6 @@ public class Formula {
 
 	}
 
-	
 	public boolean isEmpty () {
 		return formulaList.isEmpty();
 	}
@@ -100,7 +119,7 @@ public class Formula {
 	 */
 	public int getNumClauses() 
 	{
-		return numClauses;
+		return formulaList.size();
 	}
 
 	/**
@@ -122,7 +141,71 @@ public class Formula {
 	}
 
 
+	public List<Literal> getSuccessState() {
+		return successState;
+	}
 
+	public void removeLiteral (Formula f, int var) {
+		Literal temp = new Literal (var);
+		for (Clause myClauses: formulaList) {
+			myClauses.evaluateClause(temp);
+		}
+	}
+
+	public boolean runSolver()
+	{
+		if(this.isEmpty())
+		{
+			return true;			
+		}
+		if(this.hasEmptyClause)
+		{
+		return false;
+		}
+		Formula testTrue = createChild(true);
+		if(testTrue.runSolver())
+		{
+			successState.addAll(testTrue.getSuccessState());
+			successState.add(new Literal(lastIndex+1,true));
+			return true;
+		}
+		Formula testFalse = createChild(false);
+		if(testTrue.runSolver())
+		{
+			successState.addAll(testFalse.getSuccessState());
+			successState.add(new Literal(lastIndex+1,false));
+			return true;
+		}
+		return false;
+	}
+	
+	public Formula createChild(boolean givenBoolean)
+	{
+		//new formula with modified formula
+		Formula child= new Formula();
+		//Creating Literal based on index# and value given. Using lastIndex until 
+		//another option becomes available.
+		Literal testLiteral = new Literal(lastIndex+1,givenBoolean);
+		//iterator to evaluate each clause in Formula
+		Iterator <Clause> itty = formulaList.iterator();
+		//current working Clause
+		Clause testClause; 
+		//modified clause for child
+		Clause resultClause;
+
+		//loop to evaluate each Clause
+		while(itty.hasNext())
+		{
+			testClause=itty.next();
+			resultClause=testClause.evaluateClause(testLiteral);
+			if(resultClause!=null)
+			{
+				child.addClause(resultClause);
+			}
+
+		}
+		return child;
+	}
 
 	/**
 	 * This method loads and returns a formula from a file specification
@@ -177,14 +260,4 @@ public class Formula {
 		return f;
 	}
 
-	public List<Literal> getSuccessState() {
-		return successState;
-	}
-	
-	public void removeLiteral (Formula f, int var) {
-		Literal temp = new Literal (var);
-		for (Clause myClauses: formulaList) {
-			myClauses.evaluateClause(temp);
-		}
-	}
 }
