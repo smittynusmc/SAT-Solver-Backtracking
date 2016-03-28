@@ -67,13 +67,14 @@ public class Literal
 
 	protected Literal changeValue()
 	{
+		boolean returnValue;
 		if(value)
-			value=false;
+			returnValue=false;
 		else
 		{
-			value=true;
+			returnValue=true;
 		}
-		return this;
+		return new Literal (this.name,returnValue);
 	}
 
 	/**

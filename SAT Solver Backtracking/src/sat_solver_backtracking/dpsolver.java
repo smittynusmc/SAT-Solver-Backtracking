@@ -1,5 +1,7 @@
 package sat_solver_backtracking;
 
+import java.io.File;
+
 /**
  * 
  * This material is based upon work supported by 
@@ -49,11 +51,11 @@ public class dpsolver {
 		// If tf is true the new literal will be true and positive
 		// Else the new literal will be false and negative
 		if (tf) {
-			f.getSuccessState().set(var, new Literal (var));
+			f.getSuccessState().add(var, new Literal (var));
 			//f.removeLiteral(f, var);
 		}
 		else {
-			f.getSuccessState().set(var, new Literal (-var));
+			f.getSuccessState().add(var, new Literal (-var));
 			//f.removeLiteral(f, -var);
 		}
 
@@ -85,7 +87,7 @@ public class dpsolver {
 
 		formula = Formula.readFromFile(fileName);
 
-		if (dp ( formula ) )
+		if (formula.runSolver())
 			success ( formula );
 		else
 			failure ( formula );
@@ -135,16 +137,18 @@ public class dpsolver {
 
 
 	public static void main(String[] args) {
-
+		
+		/**
 		if (args.length < 1) {
 			System.err.println ("Usage: java dpsolver_skeleton cnf-formula");
 			System.exit(0);
 		}
+		*/
 
 		// Insert timing code here...
-		new dpsolver().solve ( args[0] );
-
-
+		File file = new File ("C:/TEMP/formula.txt");
+		// Insert timing code here...
+		new dpsolver().solve (file.toString());
 
 	}
 

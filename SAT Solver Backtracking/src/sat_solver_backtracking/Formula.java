@@ -176,13 +176,17 @@ public class Formula {
 			successState.add(new Literal(lastIndex+1,false));
 			return true;
 		}
-		return false;
+		else 
+		{
+			return false;
+		}
 	}
 	
 	public Formula createChild(boolean givenBoolean)
 	{
 		//new formula with modified formula
 		Formula child= new Formula();
+		child.setLastIndex(lastIndex+1);
 		//Creating Literal based on index# and value given. Using lastIndex until 
 		//another option becomes available.
 		Literal testLiteral = new Literal(lastIndex+1,givenBoolean);

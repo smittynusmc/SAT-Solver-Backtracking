@@ -60,7 +60,7 @@ public class Clause
 		//check list for Literal of opposite value & remove if present
 		Literal removeLit = workingVar.changeValue();
 		int index = testList.indexOf(removeLit);
-		if(index>0)
+		if(index>=0)
 		{
 			testList.remove(index);
 		}
