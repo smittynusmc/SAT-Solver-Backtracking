@@ -1,6 +1,8 @@
 package sat_solver_backtracking;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Write a description of class Clause here.
  * 
@@ -49,28 +51,24 @@ public class Clause
 	 * @return   a List of Literals still contained in the clause. -
 	 * 			- null if clause is satisfied.
 	 */
-	public List<Literal> evaluateClause(Literal workingVar)
+	public Clause evaluateClause(Literal workingVar)
 	{
-		//create a duplicate list to return with modification
-		List <Literal> returnClause=clauseValues;
+		Clause returnClause = null;
 		//check for Literal of opposite value & remove if present
 		Literal removeLit = workingVar.changeValue();
-		int index = returnClause.indexOf(removeLit);
+		int index = clauseValues.indexOf(removeLit);
+		// If index is -1 then this clause does not contain the literal
 		if(index>0)
 		{
-			returnClause.remove(index);
-			return returnClause;
+			clauseValues.remove(index);
+			if (clauseValues.isEmpty())
+			{
+				//This clause has been satisfied so return cull
+				return returnClause;
+			}
+			returnClause = this;
 		}
-		//check to see if Literal will satisfy Clause
-		if (returnClause.contains(workingVar))
-		{
-			return null;
-		}
-		else 
-		{
-			//return unchanged list since Literal named was not present
-			return returnClause;
-		}
+		return returnClause;
 	}
 
 	/**

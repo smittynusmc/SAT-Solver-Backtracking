@@ -1,5 +1,7 @@
 package sat_solver_backtracking;
 
+import java.io.File;
+
 /**
  * 
  * This material is based upon work supported by 
@@ -49,19 +51,19 @@ public class dpsolver {
 		// If tf is true the new literal will be true and positive
 		// Else the new literal will be false and negative
 		if (tf) {
-			f.getSuccessState().set(var, new Literal (var));
-			f.removeLiteral(f, var);
+			f.getSuccessState().add(var, new Literal (var));
+			f.setFormula(var);
 		}
 		else {
-			f.getSuccessState().set(var, new Literal (-var));
-			f.removeLiteral(f, -var);
+			f.getSuccessState().add(var, new Literal (-var));
+			f.setFormula(-var);
 		}
 
 	}
 
 	// Set given variable to "unassigned" in the given formula
 	void unset ( int var, Formula f) {
-		// Stub
+		f.unsetFormula(var);
 
 	}
 
@@ -95,21 +97,20 @@ public class dpsolver {
 	// Recursive backtracking solution
 	boolean dp ( Formula formula ) {
 
-		Formula child = formula;
-		if (isEmpty(child)) // First base case: solution found
+		if (isEmpty(formula)) // First base case: solution found
 			return true;
-		else if (hasEmptyClause (child)) // Second base case: dead end found
+		else if (hasEmptyClause (formula)) // Second base case: dead end found
 			return false;
 		else {
 
 			// Pick a branch variable
-			int var = selectBranchVar (child); 
+			int var = selectBranchVar (formula); 
 
 			// Try to set var = true in the formula
 
-			setVar (var, child, true);
+			setVar (var, formula, true);
 
-			if (dp(child)) 
+			if (dp(formula)) 
 				return true;
 			else {
 
@@ -135,14 +136,16 @@ public class dpsolver {
 
 
 	public static void main(String[] args) {
-
+		/**
 		if (args.length < 1) {
 			System.err.println ("Usage: java dpsolver_skeleton cnf-formula");
 			System.exit(0);
 		}
-
+		*/
+		
+		File file = new File ("C:/TEMP/formula.txt");
 		// Insert timing code here...
-		new dpsolver().solve ( args[0] );
+		new dpsolver().solve (file.toString());
 
 
 
