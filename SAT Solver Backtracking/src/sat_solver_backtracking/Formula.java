@@ -5,15 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
-
-import org.junit.runner.manipulation.Sorter;
-
 
 /*
 //constructor
@@ -44,6 +40,9 @@ public class Formula {
 
 	//index for backtracking
 	int lastIndex;
+	
+	//for returnvalue test if the 
+	boolean isEmpty;
 
 	// number of variables in the formula
 	int numVariables;
@@ -68,6 +67,7 @@ public class Formula {
 	{
 		formulaList = new ArrayList<Clause>(500);
 		successState = new ArrayList <Literal> (500);
+		isEmpty = true; 
 		numVariables = 0;
 		minClauseSize=Integer.MAX_VALUE;
 		minClauseIndex=-1;
@@ -80,6 +80,7 @@ public class Formula {
 	 */
 	public void addClause(Clause c)
 	{
+		
 		formulaList.add(c);
 		if(c.size()<minClauseSize)
 		{
@@ -94,7 +95,7 @@ public class Formula {
 	}
 
 	public boolean isEmpty () {
-		return formulaList.isEmpty();
+		return isEmpty;
 	}
 
 	/**
@@ -175,7 +176,7 @@ public class Formula {
 			return true;
 		}
 		Formula testFalse = createChild(false);
-		if(testTrue.runSolver())
+		if(testFalse.runSolver())
 		{
 			successState.addAll(testFalse.getSuccessState());
 			successState.add(new Literal(lastIndex+1,false));
@@ -191,12 +192,12 @@ public class Formula {
 	{
 		//new formula with modified formula
 		Formula child= new Formula();
-		child.setLastIndex(lastIndex+1);
+		child.setLastIndex(this.lastIndex+1);
 		//Creating Literal based on index# and value given. Using lastIndex until 
 		//another option becomes available.
-		Literal testLiteral = new Literal(lastIndex+1,givenBoolean);
+		Literal testLiteral = new Literal(this.lastIndex+1,givenBoolean);
 		//iterator to evaluate each clause in Formula
-		Iterator <Clause> itty = formulaList.iterator();
+		Iterator <Clause> itty = this.formulaList.iterator();
 		//current working Clause
 		Clause testClause; 
 		//modified clause for child
