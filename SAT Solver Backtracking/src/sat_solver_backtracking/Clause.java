@@ -18,7 +18,7 @@ public class Clause
 	 */
 	public Clause()
 	{  
-		clauseValues = new ArrayList<Literal>(30);
+		clauseValues = new ArrayList<Literal>(100);
 	}
 
 	/**
@@ -53,10 +53,10 @@ public class Clause
 	{
 		//create a duplicate list to return with modification
 		List <Literal> testList=clauseValues;
-		
+
 		//create blank clause to return
 		Clause returnClause = new Clause();
-		
+
 		//check list for Literal of opposite value & remove if present
 		Literal removeLit = workingVar.changeValue();
 		int index = testList.indexOf(removeLit);
@@ -72,6 +72,12 @@ public class Clause
 		//saves new modified list to returnClause
 		returnClause.addList(testList);
 		return returnClause;
+	}
+
+	public List<Literal> getValues()
+	{
+		return clauseValues;
+
 	}
 
 	/**
@@ -98,5 +104,19 @@ public class Clause
 		}
 		result += clauseValues.get(clauseValues.size()-1)+" }";
 		return result;
+	}
+
+	public boolean equals(Object o)
+	{
+		if(!(o instanceof Clause))
+		{
+			return false;
+		}
+		Clause test = (Clause)o;
+		if(clauseValues.equals(test.getValues()))
+		{
+			return true;
+		}
+		return false;
 	}
 }
