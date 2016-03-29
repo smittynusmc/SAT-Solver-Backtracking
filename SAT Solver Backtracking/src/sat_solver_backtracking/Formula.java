@@ -48,6 +48,9 @@ public class Formula {
 	{
 		formulaList = new ArrayList<Clause>(500);
 		successState = new ArrayList <Literal> (500);
+		for (int i = 0; i < 500;i++) {
+			successState.add(new Literal(0,true));
+		}
 		numVariables = 0;
 		minClauseSize=Integer.MAX_VALUE;
 		minClauseIndex=-1;
@@ -219,7 +222,6 @@ public class Formula {
 	
 	public void unsetFormula (int var) {
 		List <Clause> temp = lastRemoved.pop();
-		formulaList.clear();
 		formulaList.addAll(temp);
 	}
 }
