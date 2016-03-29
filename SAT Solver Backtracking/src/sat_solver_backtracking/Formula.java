@@ -47,13 +47,21 @@ public class Formula {
 	public Formula()
 	{
 		formulaList = new ArrayList<Clause>(500);
-		successState = new ArrayList <Literal> (500);
-		for (int i = 0; i < 500;i++) {
-			successState.add(new Literal(0,true));
-		}
+		//for (int i = 0; i < 500;i++) {
+			//successState.add(new Literal(0,true));
+		//}
 		numVariables = 0;
 		minClauseSize=Integer.MAX_VALUE;
 		minClauseIndex=-1;
+	}
+
+	public void setSuccessState(int numVariables) {
+		int size = (int) Math.pow(numVariables,2);
+		successState = new ArrayList <Literal> (size);
+		for (int i = 0; i < size;i++) {
+		 successState.add(new Literal(0,true));
+		}
+		
 	}
 
 	/**
@@ -155,7 +163,7 @@ public class Formula {
 					numVars = Integer.parseInt(data[2]);
 					numClauses = Integer.parseInt(data[3]);
 					f.setNumVariables(numVars);
-					//f.setNumClauses(numClauses);
+					f.setSuccessState(numClauses);
 				}
 				else{
 					Scanner sc = new Scanner(line);

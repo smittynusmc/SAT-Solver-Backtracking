@@ -52,11 +52,11 @@ public class dpsolver {
 		// If tf is true the new literal will be true and positive
 		// Else the new literal will be false and negative
 		if (tf) {
-			f.getSuccessState().set(var, new Literal (var));
+			f.getSuccessState().add(var, new Literal (var));
 			f.setFormula(var);
 		}
 		else {
-			f.getSuccessState().set(var, new Literal (-var));
+			f.getSuccessState().add(var, new Literal (-var));
 			f.setFormula(-var);
 		}
 
@@ -129,7 +129,6 @@ public class dpsolver {
 				else {
 					// Neither true nor false worked, so unset the branch 
 					// variable and head back
-					formula.setLastIndex(formula.lastIndex-1);
 					unset ( var-1, formula );
 					return false;			
 				}
