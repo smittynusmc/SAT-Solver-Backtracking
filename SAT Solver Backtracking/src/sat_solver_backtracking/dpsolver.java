@@ -146,7 +146,8 @@ public class dpsolver {
 		*/
 
 		// Insert timing code here...
-		File file = new File ("C:/TEMP/formula.txt");
+		File file = new File ("C:/Users/Dennis/Dropbox/School_folders/DAA/recent project code/src/umair_sat_solver/s20.cnf");
+		//File file = new File ("C:/TEMP/formula.txt");
 		// Insert timing code here...
 		new dpsolver().solve (file.toString());
 

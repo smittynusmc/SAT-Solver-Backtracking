@@ -7,7 +7,7 @@ package sat_solver_backtracking;
  * @author (Dennis Klauder) 
  * @version (2/12/16)
  */
-public class Literal
+public class Literal implements Comparable<Literal>
 {
 	// instance variables - replace the example below with your own
 	private boolean value;
@@ -105,5 +105,11 @@ public class Literal
 			return true;
 		}
 		return false;
+	}
+	
+	public int compareTo(Literal other)
+	{
+		return (Integer.valueOf(this.name).
+				compareTo(Integer.valueOf(other.getName())));
 	}
 }
