@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
@@ -19,7 +20,7 @@ public class Formula {
 	private List <Literal> successState;
 	
 	//Keeps track of the clauses removed
-	Stack <List <Clause>> lastRemoved;
+	Stack <List <Clause>> lastRemoved = new Stack <List <Clause>> ();
 
 	//index for backtracking
 	int lastIndex;
@@ -187,22 +188,30 @@ public class Formula {
 	public void setFormula (int var) {
 		Literal temp = new Literal (var);
 		List <Clause> removed = new ArrayList <Clause> ();
-		for (int index = 0; index < formulaList.size(); index++) {
-			Clause orignalClause = formulaList.get(index);
-			Clause newClause = orignalClause.evaluateClause(temp);
+		int orignalClauseSize;
+		int clauseIndex;
+		Iterator <Clause> formulaItty = formulaList.iterator();
+		while (formulaItty.hasNext()) {
+			Clause nextClause = formulaItty.next();
+			orignalClauseSize = nextClause.size();
+			clauseIndex = formulaList.indexOf(nextClause);
+			Clause newClause = nextClause.evaluateClause(temp);
 			//If the new clause is null than the clause has been satisfied
 			// HasEmptyClause gets true
 			if (newClause == null) {
-				removed.add(orignalClause);
-				formulaList.remove(index);
+				removed.add(nextClause);
+				formulaItty.remove();
 			}
 			//If the newClause equals the original then
 			//nothing has changed in the clause
 			//Otherwise replace the original clause with the new clause
 			// and add the original clause to the stack
-			else if (!(newClause.equals(orignalClause))) {
-				removed.add(orignalClause);
-				formulaList.set(index, newClause);
+			else if (newClause.size()!=orignalClauseSize) {
+				removed.add(nextClause);
+				if (newClause.clauseValues.isEmpty()) {
+					hasEmptyClause = true;
+				}
+				formulaList.set(clauseIndex,newClause);
 			}
 		}
 		lastRemoved.push(removed);
@@ -210,9 +219,7 @@ public class Formula {
 	
 	public void unsetFormula (int var) {
 		List <Clause> temp = lastRemoved.pop();
-		for (Clause myClause: temp) {
-			myClause.add(new Literal (var));
-		}
+		formulaList.clear();
 		formulaList.addAll(temp);
 	}
 }

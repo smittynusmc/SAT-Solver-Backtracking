@@ -53,22 +53,27 @@ public class Clause
 	 */
 	public Clause evaluateClause(Literal workingVar)
 	{
-		Clause returnClause = null;
-		//check for Literal of opposite value & remove if present
-		Literal removeLit = workingVar.changeValue();
-		int index = clauseValues.indexOf(removeLit);
-		// If index is -1 then this clause does not contain the literal
-		if(index>0)
-		{
-			clauseValues.remove(index);
-			if (clauseValues.isEmpty())
-			{
-				//This clause has been satisfied so return cull
+		//create a duplicate list to return with modification
+				List <Literal> testList = new ArrayList <Literal> (clauseValues);
+				
+				//create blank clause to return
+				Clause returnClause = new Clause();
+				
+				//check list for Literal of opposite value & remove if present
+				Literal removeLit = workingVar.changeValue();
+				int index = testList.indexOf(removeLit);
+				if(index>=0)
+				{
+					testList.remove(index);
+				}
+				//check to see if Literal will satisfy Clause
+				if (testList.contains(workingVar))
+				{
+					return null;
+				}
+				//saves new modified list to returnClause
+				returnClause.addList(testList);
 				return returnClause;
-			}
-			returnClause = this;
-		}
-		return returnClause;
 	}
 
 	/**

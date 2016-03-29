@@ -42,6 +42,7 @@ public class dpsolver {
 
 	// Return branch variable.
 	int selectBranchVar ( Formula f ) {
+		f.setLastIndex(f.lastIndex+1);
 		return f.lastIndex;
 	}
 
@@ -55,7 +56,7 @@ public class dpsolver {
 			f.setFormula(var);
 		}
 		else {
-			f.getSuccessState().add(var, new Literal (-var));
+			f.getSuccessState().set(var-1, new Literal (-var));
 			f.setFormula(-var);
 		}
 
@@ -64,6 +65,8 @@ public class dpsolver {
 	// Set given variable to "unassigned" in the given formula
 	void unset ( int var, Formula f) {
 		f.unsetFormula(var);
+		f.setLastIndex(f.lastIndex-1);
+		f.hasEmptyClause = false;
 
 	}
 
