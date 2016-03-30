@@ -26,7 +26,7 @@ public class dpsolver {
 	void readFormula ( String fileName ) {
 		formula = Formula.readFromFile(fileName);
 	}
-/*
+	/*
 	// Returns true if the formula has an empty clause, false otherwise
 	//this is included in the Formula Class
 	boolean hasEmptyClause ( Formula f ) {
@@ -38,7 +38,7 @@ public class dpsolver {
 	boolean isEmpty ( Formula f ) {
 		return f.isEmpty();
 	}
-	*/
+	 */
 
 	// Return branch variable.
 	int selectBranchVar ( Formula f ) {
@@ -137,20 +137,59 @@ public class dpsolver {
 
 
 	public static void main(String[] args) {
-		
+
 		/**
 		if (args.length < 1) {
 			System.err.println ("Usage: java dpsolver_skeleton cnf-formula");
 			System.exit(0);
 		}
-		*/
+		 */
+		long start,end;
 
 		// Insert timing code here...
+		start = System.currentTimeMillis();
 		File file = new File ("C:/Users/Dennis/Dropbox/School_folders/DAA/recent project code/src/umair_sat_solver/s20.cnf");
 		//File file = new File ("C:/TEMP/formula.txt");
 		// Insert timing code here...
 		new dpsolver().solve (file.toString());
+		end = System.currentTimeMillis();
+		System.out.println("s20 took "+ (end-start) + "Milliseconds to process\n");
 
+		start = System.currentTimeMillis();
+		File file1 = new File ("C:/Users/Dennis/Dropbox/School_folders/DAA/recent project code/src/umair_sat_solver/s28.cnf");
+		new dpsolver().solve (file1.toString());
+		end = System.currentTimeMillis();
+		System.out.println("s28 took "+ (end-start) + "Milliseconds to process\n");
+
+		start = System.currentTimeMillis();
+		File file2 = new File ("C:/Users/Dennis/Dropbox/School_folders/DAA/recent project code/src/umair_sat_solver/u15.cnf");
+		new dpsolver().solve (file2.toString());
+		end = System.currentTimeMillis();
+		System.out.println("u15 took "+ (end-start) + "Milliseconds to process\n");
+
+		start = System.currentTimeMillis();
+		File file3 = new File ("C:/Users/Dennis/Dropbox/School_folders/DAA/recent project code/src/umair_sat_solver/u27.cnf");
+		new dpsolver().solve (file3.toString());		
+		end = System.currentTimeMillis();
+		System.out.println("u27 took "+ (end-start) + "Milliseconds to process\n");
+		
+		start = System.currentTimeMillis();
+		File file4 = new File ("C:/Users/Dennis/Dropbox/School_folders/DAA/recent project code/src/umair_sat_solver/u29.cnf");
+		new dpsolver().solve (file4.toString());		
+		end = System.currentTimeMillis();
+		System.out.println("u29 took "+ (end-start) + "Milliseconds to process\n");
+		
+		start = System.currentTimeMillis();
+		File file5 = new File ("C:/Users/Dennis/Dropbox/School_folders/DAA/recent project code/src/umair_sat_solver/u30.cnf");
+		new dpsolver().solve (file5.toString());		
+		end = System.currentTimeMillis();
+		System.out.println("u30 took "+ (end-start) + "Milliseconds to process\n");
+		
+		start = System.currentTimeMillis();
+		File file6 = new File ("C:/Users/Dennis/Dropbox/School_folders/DAA/recent project code/src/umair_sat_solver/u32.cnf");
+		new dpsolver().solve (file6.toString());		
+		end = System.currentTimeMillis();
+		System.out.println("u32 took "+ (end-start) + "Milliseconds to process\n");
 	}
 
 }

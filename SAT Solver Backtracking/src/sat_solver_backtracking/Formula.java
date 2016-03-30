@@ -23,7 +23,7 @@ numVariables = 0; //not sure how to use
 //variables
 private List<Clause> formulaList;  //yes
 private List <Literal> successState;  //yes
-***** int lastIndex; //i think so, use to set literals for processing
+ ***** int lastIndex; //i think so, use to set literals for processing
 int numVariables; //I think this is currently unused
 int numClauses; //I think method is set to use formula size.
 boolean hasEmptyClause = false; //auto changed while adding clauses
@@ -41,8 +41,8 @@ public class Formula {
 
 	//index for backtracking
 	int lastIndex;
-	
-	//for returnvalue test if the 
+
+	//for return value test  
 	boolean isEmpty;
 
 	// number of variables in the formula
@@ -81,7 +81,8 @@ public class Formula {
 	 */
 	public void addClause(Clause c)
 	{
-		
+		if (this.isEmpty == true)
+			isEmpty=false;
 		formulaList.add(c);
 		if(c.size()<minClauseSize)
 		{
@@ -165,30 +166,32 @@ public class Formula {
 		{
 			return true;			
 		}
-		if(this.hasEmptyClause)
-		{
-		return false;
-		}
-		Formula testTrue = createChild(true);
-		if(testTrue.runSolver())
-		{
-			successState.addAll(testTrue.getSuccessState());
-			successState.add(new Literal(lastIndex+1,true));
-			return true;
-		}
-		Formula testFalse = createChild(false);
-		if(testFalse.runSolver())
-		{
-			successState.addAll(testFalse.getSuccessState());
-			successState.add(new Literal(lastIndex+1,false));
-			return true;
-		}
-		else 
+		else if(this.hasEmptyClause)
 		{
 			return false;
 		}
+		else{
+			Formula testTrue = createChild(true);
+			if(testTrue.runSolver())
+			{
+				successState.addAll(testTrue.getSuccessState());
+				successState.add(new Literal(lastIndex+1,true));
+				return true;
+			}
+			Formula testFalse = createChild(false);
+			if(testFalse.runSolver())
+			{
+				successState.addAll(testFalse.getSuccessState());
+				successState.add(new Literal(lastIndex+1,false));
+				return true;
+			}
+			else 
+			{
+				return false;
+			}
+		}
 	}
-	
+
 	public Formula createChild(boolean givenBoolean)
 	{
 		//new formula with modified formula

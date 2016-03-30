@@ -42,6 +42,11 @@ public class Clause
 		clauseValues.addAll(clauseList);
 	}
 
+	public void clearClause()
+	{
+		clauseValues.clear();
+	}
+
 	/**
 	 * This will evaluate the Clause against the Literal provided
 	 * 
@@ -52,7 +57,8 @@ public class Clause
 	public Clause evaluateClause(Literal workingVar)
 	{
 		//create a duplicate list to return with modification
-		List <Literal> testList=clauseValues;
+		List <Literal> testList = new ArrayList<Literal>();
+		testList.addAll(clauseValues);
 
 		//create blank clause to return
 		Clause returnClause = new Clause();
@@ -65,7 +71,7 @@ public class Clause
 			testList.remove(index);
 		}
 		//check to see if Literal will satisfy Clause
-		if (testList.contains(workingVar))
+		else if (testList.contains(workingVar))
 		{
 			return null;
 		}
