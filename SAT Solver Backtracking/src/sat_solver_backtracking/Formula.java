@@ -248,8 +248,11 @@ public class Formula {
 					//f.setNumClauses(numClauses);
 				}
 				else{
-					Scanner sc = new Scanner(line);
 					Clause c = new Clause();
+					while (!(line.endsWith(" 0 ")) || line.endsWith(" 0")) {
+						line = line + br.readLine();
+					}
+					Scanner sc = new Scanner(line);
 					while(sc.hasNextInt()){
 						var = sc.nextInt();
 						if(var == 0)
@@ -272,6 +275,20 @@ public class Formula {
 			System.out.println("file I/O error: " + ex);
 		}
 		return f;
+	}
+	
+	public String toString()
+	{
+		String result = "{ ";
+		for (int i=0;i<formulaList.size()-1;i++)
+		{
+			if (formulaList.get(i)==null) {
+				result += "[]" + " and ";
+			}
+			result += formulaList.get(i) + " and ";
+		}
+		result += formulaList.get(formulaList.size()-1)+" }";
+		return result;
 	}
 
 }
