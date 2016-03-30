@@ -145,7 +145,7 @@ public class dpsolver {
 		}
 		*/
 		
-		File file = new File ("C:/TEMP/formulaU20.txt");
+		File file = new File ("C:/TEMP/formula.txt");
 		// Insert timing code here...
 		new dpsolver().solve (file.toString());
 

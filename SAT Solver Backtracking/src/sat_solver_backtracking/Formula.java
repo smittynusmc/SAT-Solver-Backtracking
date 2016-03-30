@@ -56,7 +56,7 @@ public class Formula {
 	}
 
 	public void setSuccessState(int numVariables) {
-		int size = (int) Math.pow(numVariables,2);
+		int size = numVariables;
 		successState = new ArrayList <Literal> (size);
 		for (int i = 0; i < size;i++) {
 		 successState.add(new Literal(0,true));
@@ -230,6 +230,7 @@ public class Formula {
 	
 	public void unsetFormula (int var) {
 		List <Clause> temp = lastRemoved.pop();
-		formulaList.addAll(temp);
+		temp.addAll(formulaList);
+		formulaList.addAll(0, temp);
 	}
 }
