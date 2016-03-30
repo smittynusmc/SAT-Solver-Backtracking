@@ -249,7 +249,7 @@ public class Formula {
 				}
 				else{
 					Clause c = new Clause();
-					while (!(line.endsWith(" 0 ")) || line.endsWith(" 0")) {
+					while (!(line.contains(" 0"))) {
 						line = line + br.readLine();
 					}
 					Scanner sc = new Scanner(line);
