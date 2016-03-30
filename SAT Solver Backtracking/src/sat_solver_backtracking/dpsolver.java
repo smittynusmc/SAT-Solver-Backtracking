@@ -190,6 +190,61 @@ public class dpsolver {
 		new dpsolver().solve (file6.toString());		
 		end = System.currentTimeMillis();
 		System.out.println("u32 took "+ (end-start) + "Milliseconds to process\n");
+		
+		//-----
+		start = System.currentTimeMillis();
+		File newfile1 = new File ("C:/Users/Dennis/workspace/ais8.cnf");
+		new dpsolver().solve (newfile1.toString());		
+		end = System.currentTimeMillis();
+		System.out.println("ais8 took "+ (end-start) + "Milliseconds to process\n");
+		
+		start = System.currentTimeMillis();
+		File newfile2 = new File ("C:/Users/Dennis/workspace/coloring.cnf");
+		new dpsolver().solve (newfile2.toString());		
+		end = System.currentTimeMillis();
+		System.out.println("coloring took "+ (end-start) + "Milliseconds to process\n");
+		
+		start = System.currentTimeMillis();
+		File newfile3 = new File ("C:/Users/Dennis/workspace/gs36.cnf");
+		new dpsolver().solve (newfile3.toString());		
+		end = System.currentTimeMillis();
+		System.out.println("gs36 took "+ (end-start) + "Milliseconds to process\n");
+		
+		start = System.currentTimeMillis();
+		File newfile4 = new File ("C:/Users/Dennis/workspace/h50.cnf");
+		new dpsolver().solve (newfile4.toString());		
+		end = System.currentTimeMillis();
+		System.out.println("h50 took "+ (end-start) + "Milliseconds to process\n");
+		
+		start = System.currentTimeMillis();
+		File newfile5 = new File ("C:/Users/Dennis/workspace/hole7.cnf");
+		new dpsolver().solve (newfile5.toString());		
+		end = System.currentTimeMillis();
+		System.out.println("hole7 took "+ (end-start) + "Milliseconds to process\n");
+		
+		start = System.currentTimeMillis();
+		File newfile6 = new File ("C:/Users/Dennis/workspace/hole8.cnf");
+		new dpsolver().solve (newfile6.toString());		
+		end = System.currentTimeMillis();
+		System.out.println("hole8 took "+ (end-start) + "Milliseconds to process\n");
+		
+		start = System.currentTimeMillis();
+		File newfile7 = new File ("C:/Users/Dennis/workspace/ii8a1.cnf");
+		new dpsolver().solve (newfile7.toString());		
+		end = System.currentTimeMillis();
+		System.out.println("ii8a1 took "+ (end-start) + "Milliseconds to process\n");
+		
+		start = System.currentTimeMillis();
+		File newfile8 = new File ("C:/Users/Dennis/workspace/s28.cnf");
+		new dpsolver().solve (newfile8.toString());		
+		end = System.currentTimeMillis();
+		System.out.println("s28 took "+ (end-start) + "Milliseconds to process\n");
+		
+		start = System.currentTimeMillis();
+		File newfile9 = new File ("C:/Users/Dennis/workspace/u32.cnf");
+		new dpsolver().solve (newfile9.toString());		
+		end = System.currentTimeMillis();
+		System.out.println("u32 took "+ (end-start) + "Milliseconds to process\n");
 	}
 
 }
