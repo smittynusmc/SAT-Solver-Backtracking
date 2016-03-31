@@ -9,7 +9,7 @@ import org.junit.Test;
  * 
  * @author Adam Tucker
  * @author Dennis Kluader
- * @author Umair Chaudry
+ * @author Umair Chaudhry
  * @version 03/30/2016
  *
  */

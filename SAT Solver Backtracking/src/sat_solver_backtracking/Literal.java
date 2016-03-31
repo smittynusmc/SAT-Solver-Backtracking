@@ -1,12 +1,12 @@
 package sat_solver_backtracking;
 
 /**
- * A literal is a Boolean variable or the negation of variable
- * This will store a boolean value and a name for uses of comparison
+ * A literal is a Boolean variable or the negation of variable and
+ * will store a boolean value and a name for uses of comparison
  * 
  * @author Adam Tucker
  * @author Dennis Kluader
- * @author Umair Chaudry
+ * @author Umair Chaudhry
  * @version 03/30/2016
  *
  */

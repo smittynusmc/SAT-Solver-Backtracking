@@ -10,16 +10,15 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Stack;
 
 /**
- * A formula is a conjunction (and) of clauses, or a single clause
- * The formula evaluates itself and returns true if satisfiable and false otherwise
+ * A formula is a conjunction (and) of clauses, or a single clause, in which
+ * the formula evaluates itself and returns true if satisfiable and false otherwise,
  * Recursively travels up and down the formula to solve the formula using backtracking
  * 
  * @author Adam Tucker
  * @author Dennis Kluader
- * @author Umair Chaudry
+ * @author Umair Chaudhry
  * @version 03/30/2016
  *
  */
@@ -165,18 +164,25 @@ public class Formula {
 		{
 			return false;
 		}
+		
 		//Recursive element
 		else{
+			// Creates a child formula with true (a formula that has evaluated classes on the
+			// current level, removed satisfied clauses and removes unnecessary literals
 			Formula testTrue = createChild(true);
 			if(testTrue.runSolver())
-			{
+			{	
+				//Found a solution and adds to successState
 				successState.addAll(testTrue.getSuccessState());
 				successState.add(new Literal(lastIndex+1,true));
 				return true;
 			}
+			// Creates a child formula with true (a formula that has evaluated classes on the
+			// current level, removed satisfied clauses and removes unnecessary literals
 			Formula testFalse = createChild(false);
 			if(testFalse.runSolver())
-			{
+			{	
+				// Found a solution and adds to successState
 				successState.addAll(testFalse.getSuccessState());
 				successState.add(new Literal(lastIndex+1,false));
 				return true;
@@ -215,7 +221,10 @@ public class Formula {
 		while(itty.hasNext())
 		{
 			testClause=itty.next();
+			// Sends the clause to be evaluated
 			resultClause=testClause.evaluateClause(testLiteral);
+			// If returnClause is null the clause was satisfied
+			// otherwise add the evaluate clause to the child formula
 			if(resultClause!=null)
 			{
 				child.addClause(resultClause);

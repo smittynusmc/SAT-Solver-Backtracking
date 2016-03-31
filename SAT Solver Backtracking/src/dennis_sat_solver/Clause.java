@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class Clause
 {
-    ArrayList <Literal> values;
+    List <Literal> values;
     /**
      * Constructor for objects of class State
      */
@@ -31,7 +31,7 @@ public class Clause
         return values.get(name-1).get();
     }
 
-    public List  getAll()
+    public List <Literal> getAll()
     {
         return values;
     }
@@ -71,7 +71,7 @@ public class Clause
      * @param    a list 
      * @return   boolean response if the state will satisfy the clause
      */
-    public boolean evaluate(List state)
+    public boolean evaluate(List <Literal> state)
     {
         boolean sucess = false;
         int i=0;

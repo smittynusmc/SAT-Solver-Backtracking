@@ -4,22 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A clause is a disjunction (or) of literals, or single literal
- * A clause holds a collection of literal
+ * A clause is a disjunction (or) of literals, or single literal and
+ * a clause holds a collection of literal
  * 
  * @author Adam Tucker
  * @author Dennis Kluader
- * @author Umair Chaudry
+ * @author Umair Chaudhry
  * @version 03/30/2016
  *
  */
 public class Clause
 {	
 	// Collections of literals that are either positive or negative
+	// This allows a clause to be in charge of its own literals
+	// in which a formula doesn't now about the literals just the clause itself
 	List <Literal> clauseValues;
 
 	/**
-	 * Constructor for objects of class State
+	 * Constructor for objects of class State.
 	 * Array size set to a default of 100
 	 */
 	public Clause()
@@ -28,7 +30,7 @@ public class Clause
 	}
 
 	/**
-	 * Adds one literal into the existing Array of Literals
+	 * Adds one literal into the existing Array of Literals.
 	 * @param input The literal to add to the clause
 	 */
 	public void add (Literal input)
@@ -37,7 +39,7 @@ public class Clause
 	}
 
 	/**
-	 * Adds an entire list of Literals as a clause
+	 * Adds an entire list of Literals as a clause.
 	 * @param clauseList The collection of literals to add to the clause
 	 */
 	public void addList(List<Literal> clauseList)
@@ -56,37 +58,45 @@ public class Clause
 
 	/**
 	 * This will evaluate the Clause against the Literal provided
+	 * See comments in method for more explanation
 	 * @param workingVar A Literal object 
 	 * @return A List of Literals still contained in the clause, otherwise null if clause is satisfied.
 	 */
 	public Clause evaluateClause(Literal workingVar)
 	{
-		//create a duplicate list to return with modification
+		// Create a duplicate list to return with modification
+		// Otherwise method will change original clause
 		List <Literal> testList = new ArrayList<Literal>();
 		testList.addAll(clauseValues);
 
-		//create blank clause to return
+		//Create blank clause to return
 		Clause returnClause = new Clause();
 
-		//check list for Literal of opposite value & remove if present
+		//Check list for Literal of opposite value & remove if present
 		Literal removeLit = workingVar.changeValue();
 		int index = testList.indexOf(removeLit);
+		// If the opposite value is present in the testList than it will remove
+		// it from the clause because the opposite value of the working literal
+		// is unnecessary
+		// If the index == -1 then the opposite literal is not present
 		if(index>=0)
 		{
 			testList.remove(index);
 		}
-		//check to see if Literal will satisfy Clause
+		
+		//Check to see if Literal will satisfy Clause
 		else if (testList.contains(workingVar))
 		{
 			return null;
 		}
+		
 		//saves new modified list to returnClause
 		returnClause.addList(testList);
 		return returnClause;
 	}
 	
 	/**
-	 * Gets the collection of literals
+	 * Gets the collection of literals.
 	 * @return The collection of literals
 	 */
 	public List<Literal> getValues()
@@ -105,7 +115,7 @@ public class Clause
 	}
 
 	/**
-	 * Returns a string formatted as { 1 true or 2 true or 3 false }
+	 * Returns a string formatted as { 1 true or 2 true or 3 false }.
 	 * @return The contents of the List in a String format
 	 */
 	public String toString()
@@ -120,7 +130,7 @@ public class Clause
 	}
 
 	/**
-	 * Two clauses are equal if they have the same collection of literals
+	 * Two clauses are equal if they have the same collection of literals.
 	 * @param o The object to check if this is equal
 	 * @return The result of the check
 	 */

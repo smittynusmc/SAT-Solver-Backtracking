@@ -1,83 +1,236 @@
 package sat_solver_backtracking;
 
 import static org.junit.Assert.*;
-
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * Test a suite for a formula
  * 
  * @author Adam Tucker
  * @author Dennis Kluader
- * @author Umair Chaudry
+ * @author Umair Chaudhry
  * @version 03/30/2016
  *
  */
 
 public class FormulaTest {
-
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
+	
+	/**
+	 * Test the creation of a empty formula
+	 */
 	@Test
 	public void testFormula() {
-		fail("Not yet implemented");
-	}
 
+		
+		Formula testForm = new Formula();
+		assertTrue(testForm.isEmpty());
+		
+		assertEquals(testForm.getLastIndex(),0);
+		
+		
+		
+	}
+	
+	/**
+	 * Tests adding a clause to a formula
+	 */
 	@Test
 	public void testAddClause() {
-		fail("Not yet implemented");
-	}
-
+		Clause clause1 = new Clause();
+		Clause clause2 = new Clause();
+		Clause clause3 = new Clause();
+		
+		Literal onet = new Literal(1);
+		Literal onef = new Literal(-1);
+		Literal twot = new Literal(2);
+		Literal twof = new Literal(-2);
+		Literal threet = new Literal(3);
+		Literal threef = new Literal(-3);
+	
+		clause1.add(onet);
+		clause1.add(twot);
+		
+		clause2.add(onef);
+		clause2.add(twot);
+		clause2.add(threet);
+		
+		clause3.add(onet);
+		clause3.add(twof);
+		clause3.add(threef);
+		
+		Formula testForm = new Formula();
+		
+		testForm.addClause(clause1);
+		assertEquals(testForm.getNumClauses(),1);
+		assertFalse(testForm.isEmpty());
+		testForm.addClause(clause2);
+		assertEquals(testForm.getNumClauses(),2);
+		testForm.addClause(clause3);
+		assertEquals(testForm.getNumClauses(),3);
+		assertFalse(testForm.hasEmptyClause);
+		
+		Clause clause4=new Clause();
+		testForm.addClause(clause4);
+		assertTrue(testForm.hasEmptyClause);
+		
+		}
+	
+	/**
+	 * Test if a formula is empty
+	 */
 	@Test
 	public void testIsEmpty() {
-		fail("Not yet implemented");
+		
+		Clause clause1 = new Clause();
+		
+		Literal onet = new Literal(1);
+		Literal twot = new Literal(2);
+		
+		clause1.add(onet);
+		clause1.add(twot);
+		Formula testForm = new Formula();
+		assertTrue(testForm.isEmpty());
+		testForm.addClause(clause1);
+		assertEquals(testForm.getNumClauses(),1);
+		assertFalse(testForm.isEmpty());
 	}
-
-	@Test
-	public void testGetNumVariables() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetNumVariables() {
-		fail("Not yet implemented");
-	}
-
+	
+	/**
+	 * Test retrieving the number of clauses in a formula
+	 */
 	@Test
 	public void testGetNumClauses() {
-		fail("Not yet implemented");
+		Clause clause1 = new Clause();
+		Clause clause2 = new Clause();
+		Clause clause3 = new Clause();
+		
+		Literal onet = new Literal(1);
+		Literal onef = new Literal(-1);
+		Literal twot = new Literal(2);
+		Literal twof = new Literal(-2);
+		Literal threet = new Literal(3);
+		Literal threef = new Literal(-3);
+	
+		clause1.add(onet);
+		clause1.add(twot);
+		
+		clause2.add(onef);
+		clause2.add(twot);
+		clause2.add(threet);
+		
+		clause3.add(onet);
+		clause3.add(twof);
+		clause3.add(threef);
+		
+		Formula testForm = new Formula();
+		
+		testForm.addClause(clause1);
+		assertEquals(testForm.getNumClauses(),1);
+		testForm.addClause(clause2);
+		assertEquals(testForm.getNumClauses(),2);
+		testForm.addClause(clause3);
+		assertEquals(testForm.getNumClauses(),3);
+		Clause clause4=new Clause();
+		testForm.addClause(clause4);
+		assertEquals(testForm.getNumClauses(),4);
+		
+		Formula child1t = testForm.createChild(true);
+		Formula child1f = testForm.createChild(false);
+		assertEquals(child1t.getNumClauses(),2);
+		assertEquals(child1f.getNumClauses(),3);
+		
 	}
-
+	
+	/**
+	 * Test retrieving the last index of formula
+	 */
 	@Test
 	public void testGetLastIndex() {
-		fail("Not yet implemented");
+		Clause clause1 = new Clause();
+		Clause clause2 = new Clause();
+		Clause clause3 = new Clause();
+		
+		Literal onet = new Literal(1);
+		Literal onef = new Literal(-1);
+		Literal twot = new Literal(2);
+		Literal twof = new Literal(-2);
+		Literal threet = new Literal(3);
+		Literal threef = new Literal(-3);
+	
+		clause1.add(onet);
+		clause1.add(twot);
+		
+		clause2.add(onef);
+		clause2.add(twot);
+		clause2.add(threet);
+		
+		clause3.add(onet);
+		clause3.add(twof);
+		clause3.add(threef);
+		
+		Formula testForm = new Formula();
+		
+		testForm.addClause(clause1);
+		testForm.addClause(clause2);
+		testForm.addClause(clause3);
+		
+		assertEquals(testForm.getLastIndex(),0);
+		Formula child1t = testForm.createChild(true);
+		Formula child1f = testForm.createChild(false);
+		assertEquals(child1t.getLastIndex(),1);
+		assertEquals(child1f.getLastIndex(),1);
+		
 	}
-
-	@Test
-	public void testSetLastIndex() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetSuccessState() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testRemoveLiteral() {
-		fail("Not yet implemented");
-	}
-
+	
+	/**
+	 * Test the recursive solver and checks to see if successState matches
+	 */
 	@Test
 	public void testRunSolver() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testCreateChild() {
-		fail("Not yet implemented");
+		
+		Clause clause1 = new Clause();
+		Clause clause2 = new Clause();
+		Clause clause3 = new Clause();
+		
+		Clause clause5 = new Clause();
+		Clause clause6 = new Clause();
+		Clause clause7 = new Clause();
+		
+		Literal onet = new Literal(1);
+		Literal onef = new Literal(-1);
+		Literal twot = new Literal(2);
+		Literal twof = new Literal(-2);
+		Literal threet = new Literal(3);
+		Literal threef = new Literal(-3);
+	
+		clause1.add(onet);
+		clause1.add(twot);
+		
+		clause2.add(onef);
+		clause2.add(twot);
+		clause2.add(threet);
+		
+		clause3.add(onet);
+		clause3.add(twof);
+		clause3.add(threef);
+		
+		Formula testForm = new Formula();
+		testForm.addClause(clause1);
+		testForm.addClause(clause2);
+		testForm.addClause(clause3);
+		Clause clause4=new Clause();
+		testForm.addClause(clause4);
+		assertFalse(testForm.runSolver());
+		
+		Formula test2 = new Formula();
+		clause7.add(onet);
+		clause5.add(twot);
+		clause6.add(threet);
+		test2.addClause(clause5);
+		test2.addClause(clause6);
+		test2.addClause(clause7);
+		assertTrue(test2.runSolver());
+		assertEquals(test2.getSuccessState().toString(),"[1 true, 2 true, 3 true]");
 	}
 
 }
