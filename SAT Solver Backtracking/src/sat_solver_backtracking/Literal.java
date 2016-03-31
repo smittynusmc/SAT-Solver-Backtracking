@@ -1,33 +1,38 @@
 package sat_solver_backtracking;
+
 /**
- * Write a description of class Literal here.
- * 
+ * A literal is a Boolean variable or the negation of variable
  * This will store a boolean value and a name for uses of comparison
  * 
- * @author (Dennis Klauder) 
- * @version (2/12/16)
+ * @author Adam Tucker
+ * @author Dennis Kluader
+ * @author Umair Chaudry
+ * @version 03/30/2016
+ *
  */
-public class Literal implements Comparable<Literal>
+public class Literal implements Comparable <Literal>
 {
-	// instance variables - replace the example below with your own
+	// The value of the literal
 	private boolean value;
+	// The literal number or negation of that number
 	private int name;
 
 	/**
-	 *Default Constructor for objects of class Literal
+	 * Constructor for a Literal
+	 * @param nameGiven The name of the literal
+	 * @param valueGiven The value of the literal
 	 */
-	//     public Literal(String nameGiven)
-	//     {
-	//         value = true;
-	//         name = nameGiven;
-	//     }
-
 	public Literal(int nameGiven, boolean valueGiven)
 	{
 		value = valueGiven;
 		name = Math.abs(nameGiven);
 	}
 
+	/**
+	 * Alternate constructor where the value is dependent
+	 * on the number given from the formula
+	 * @param input The name of the literal
+	 */
 	public Literal (int input)
 	{
 		if (input <0)
@@ -43,14 +48,17 @@ public class Literal implements Comparable<Literal>
 	}
 
 	/**
-	 * @return     the boolean value of the Literal
+	 * The value of the Literal
+	 * @return The boolean value of the Literal
 	 */
 	public boolean get()
 	{
 		return value;
 	}
+	
 	/**
-	 *	@return		the name String assigned to the Literal
+	 * The name of the literal
+	 *	@return The name String assigned to the Literal
 	 */
 	public int getName()
 	{
@@ -58,13 +66,20 @@ public class Literal implements Comparable<Literal>
 	}
 
 	/**
-	 *	@parameter		allows the value of the Literal to be changed.
+	 * Sets the boolean value of literal
+	 *	@param newValue Allows the value of the Literal to be changed.
 	 */
 	public void set(boolean newValue)
 	{
 		value = newValue;
 	}
-
+	
+	/**
+	 * Changes the value of the literal to the opposite value
+	 * Allows the program to find a opposite literal in
+	 * any clause to be removed
+	 * @return The literal with the opposite boolean value
+	 */
 	protected Literal changeValue()
 	{
 		boolean returnValue;
@@ -78,7 +93,8 @@ public class Literal implements Comparable<Literal>
 	}
 
 	/**
-	 *	@return		the value of the Literal as a String
+	 * Returns String i.e. 1 true or -2 false
+	 *	@return	The value and name of the Literal as a String
 	 */
 	public String toString()
 	{
@@ -90,8 +106,10 @@ public class Literal implements Comparable<Literal>
 		return result;
 	}
 
-	/** @return true only if this Literal is equal to the 
-	 * parameter, other 
+	/** 
+	 * Two literals are equal if they have the same name and value
+	 * @param other The object to compare with this literal
+	 * @return True if both literals have the same value and name, false otherwise
 	 */
 	public boolean equals (Object other)
 	{
@@ -107,6 +125,10 @@ public class Literal implements Comparable<Literal>
 		return false;
 	}
 	
+	/**
+	 * Compares two literals names and returns the result
+	 * @param other The literal to compare
+	 */
 	public int compareTo(Literal other)
 	{
 		return (Integer.valueOf(this.name).

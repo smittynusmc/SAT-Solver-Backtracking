@@ -1,12 +1,20 @@
 package sat_solver_backtracking;
 
 import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+/**
+ * 
+ * @author Adam Tucker
+ * @author Dennis Kluader
+ * @author Umair Chaudry
+ * @version 03/30/2016
+ *
+ */
 
 public class LiteralTest {
 

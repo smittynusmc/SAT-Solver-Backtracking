@@ -5,6 +5,15 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+/**
+ * 
+ * @author Adam Tucker
+ * @author Dennis Kluader
+ * @author Umair Chaudry
+ * @version 03/30/2016
+ *
+ */
+
 public class FormulaTest {
 
 	@BeforeClass
