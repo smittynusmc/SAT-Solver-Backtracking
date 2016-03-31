@@ -3,12 +3,10 @@ package sat_solver_backtracking;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * Test suite for a clause
  * 
  * @author Adam Tucker
  * @author Dennis Kluader
@@ -18,7 +16,10 @@ import org.junit.Test;
  */
 
 public class ClauseTest {
-
+	
+	/**
+	 * Test adding a list as the collection of literals
+	 */
 	@Test
 	public void testAddList() 
 	{
@@ -28,9 +29,7 @@ public class ClauseTest {
 		Clause clause4 = new Clause();
 
 		Literal onet = new Literal(1);
-		Literal onef = new Literal(-1);
 		Literal twot = new Literal(2);
-		Literal twof = new Literal(-2);
 		Literal threet = new Literal(3);
 		Literal threef = new Literal(-3);
 		ArrayList <Literal> testList=new ArrayList<Literal>();
@@ -50,7 +49,10 @@ public class ClauseTest {
 		clause4.add(threet);
 		assertFalse(clause3.equals(clause4));
 	}
-
+	
+	/**
+	 * Test how a clause evaluates its literal and the satisfiability of itself
+	 */
 	@Test
 	public void testEvaluateClause()
 	{
@@ -92,21 +94,18 @@ public class ClauseTest {
 		assertEquals(null,result4);
 
 	}
-
+	
+	/**
+	 * Test a clauses retrieves its attributes
+	 */
 	@Test
 	public void testGetValues() 
 	{
 		Clause clause1 = new Clause();
-		Clause clause2 = new Clause();
-		Clause clause3 = new Clause();
-		Clause clause4 = new Clause();
-
+		
 		Literal onet = new Literal(1);
-		Literal onef = new Literal(-1);
 		Literal twot = new Literal(2);
-		Literal twof = new Literal(-2);
 		Literal threet = new Literal(3);
-		Literal threef = new Literal(-3);
 		
 		ArrayList <Literal> testList=new ArrayList<Literal>();
 		testList.add(onet);
@@ -119,23 +118,26 @@ public class ClauseTest {
 		assertEquals(clause1.getValues(),testList);
 	
 	}
-
+	
+	/**
+	 * Test a clauses ability to clear its literals
+	 */
 	public void testClearClause()
 	{
 		Clause clause1 = new Clause();
 		Literal onet = new Literal(1);
-		Literal onef = new Literal(-1);
 		Literal twot = new Literal(2);
-		Literal twof = new Literal(-2);
 		Literal threet = new Literal(3);
-		Literal threef = new Literal(-3);
 		clause1.add(onet);
 		clause1.add(twot);
 		clause1.add(threet);
 		clause1.clearClause();
 		assertTrue(clause1.size()==0);
 	}
-
+	
+	/**
+	 * Test a clauses size
+	 */
 	@Test
 	public void testSize() 
 	{
@@ -152,14 +154,4 @@ public class ClauseTest {
 		clause1.clearClause();
 		assertTrue(clause1.size()==0);
 	}
-
-	@Test
-	public void testToString() 
-	{
-
-
-	}
-
-
-
 }

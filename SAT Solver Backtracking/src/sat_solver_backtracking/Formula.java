@@ -98,7 +98,7 @@ public class Formula {
 
 	/**
 	 * This method returns the number of variables in the formula
-	 * @return the number of variables
+	 * @return The number of variables
 	 */
 	public int getNumVariables() 
 	{

@@ -1,13 +1,11 @@
 package sat_solver_backtracking;
 
 import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * 
+ * Test suite for the literal class
  * 
  * @author Adam Tucker
  * @author Dennis Kluader
@@ -17,23 +15,10 @@ import org.junit.Test;
  */
 
 public class LiteralTest {
-
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
+	
+	/**
+	 * Test for creation of a literal with integer (name) and value (boolean)
+	 */
 	@Test
 	public void testLiteralIntBoolean() 
 	{
@@ -46,6 +31,9 @@ public class LiteralTest {
 
 	}
 
+	/**
+	 * Test the creation of a literal with integer (name)
+	 */
 	@Test
 	public void testLiteralInt() 
 	{
@@ -59,7 +47,10 @@ public class LiteralTest {
 		assertEquals(test4.get(),true);
 		assertEquals(test5.get(),true);
 	}
-
+	
+	/**
+	 * Test a literals get method
+	 */
 	@Test
 	public void testGet() 
 	{
@@ -72,7 +63,10 @@ public class LiteralTest {
 		assertEquals(test8.get(),false);
 		assertEquals(test9.get(),true);
 	}
-
+	
+	/**
+	 * Test a literals get name method
+	 */
 	@Test
 	public void testGetName() {
 		Literal test6 =new Literal(-231,true);
@@ -84,7 +78,10 @@ public class LiteralTest {
 		assertEquals(test8.getName(),589);
 		assertEquals(test9.getName(),9184);
 	}
-
+	
+	/**
+	 * Test a literal set method
+	 */
 	@Test
 	public void testSet() {
 		Literal test6 =new Literal(-231,true);
@@ -106,7 +103,10 @@ public class LiteralTest {
 		assertEquals(test7.get(),true);
 		
 	}
-
+	
+	/**
+	 * Test a literals change value method
+	 */
 	@Test
 	public void testChangeValue() {
 		Literal test6 =new Literal(-231,true);
@@ -116,7 +116,10 @@ public class LiteralTest {
 		assertEquals(returnLit.get(),false);
 		assertEquals(returnLit.getName(),231);
 	}
-
+	
+	/**
+	 * Test a literals toString method
+	 */
 	@Test
 	public void testToString() {
 		Literal test6 =new Literal(-231,true);
@@ -128,7 +131,10 @@ public class LiteralTest {
 		assertEquals(test8.toString(),"589 false");
 		assertEquals(test9.toString(),"9184 true");
 	}
-
+	
+	/**
+	 * Test a literals equal method
+	 */
 	@Test
 	public void testEqualsObject() {
 		assertEquals(new Literal(-231),new Literal(231,false));
