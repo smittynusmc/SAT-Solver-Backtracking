@@ -1,12 +1,17 @@
 package sat_solver_backtracking;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Write a description of class Clause here.
+ * A clause is a disjunction (or) of literals, or single literal
+ * A clause holds a collection of literal
  * 
- * @author (Dennis Klauder) 
- * @author (Adam Tucker)
- * @versionBackTracking (03-19-16)
+ * @author Adam Tucker
+ * @author Dennis Kluader
+ * @author Umair Chaudry
+ * @version 03/30/2016
+ *
  */
 public class Clause
 {	
@@ -15,6 +20,7 @@ public class Clause
 
 	/**
 	 * Constructor for objects of class State
+	 * Array size set to a default of 100
 	 */
 	public Clause()
 	{  
@@ -23,8 +29,7 @@ public class Clause
 
 	/**
 	 * Adds one literal into the existing Array of Literals
-	 * 
-	 * @param input
+	 * @param input The literal to add to the clause
 	 */
 	public void add (Literal input)
 	{
@@ -33,8 +38,7 @@ public class Clause
 
 	/**
 	 * Adds an entire list of Literals as a clause
-	 * 
-	 * @param clauseList
+	 * @param clauseList The collection of literals to add to the clause
 	 */
 	public void addList(List<Literal> clauseList)
 	{
@@ -42,6 +46,9 @@ public class Clause
 		clauseValues.addAll(clauseList);
 	}
 
+	/**
+	 * Clears the clause
+	 */
 	public void clearClause()
 	{
 		clauseValues.clear();
@@ -49,10 +56,8 @@ public class Clause
 
 	/**
 	 * This will evaluate the Clause against the Literal provided
-	 * 
-	 * @param    a Literal object 
-	 * @return   a List of Literals still contained in the clause. -
-	 * 			- null if clause is satisfied.
+	 * @param workingVar A Literal object 
+	 * @return A List of Literals still contained in the clause, otherwise null if clause is satisfied.
 	 */
 	public Clause evaluateClause(Literal workingVar)
 	{
@@ -79,7 +84,11 @@ public class Clause
 		returnClause.addList(testList);
 		return returnClause;
 	}
-
+	
+	/**
+	 * Gets the collection of literals
+	 * @return The collection of literals
+	 */
 	public List<Literal> getValues()
 	{
 		return clauseValues;
@@ -88,8 +97,7 @@ public class Clause
 
 	/**
 	 * Returns the size of the clause as an integer.
-	 * 
-	 * @return	integer.
+	 * @return The size of the clause
 	 */
 	public int size()
 	{
@@ -97,9 +105,8 @@ public class Clause
 	}
 
 	/**
-	 * toString
-	 * 
-	 * @return     the contents of the List in a String format
+	 * Returns a string formatted as { 1 true or 2 true or 3 false }
+	 * @return The contents of the List in a String format
 	 */
 	public String toString()
 	{
@@ -112,6 +119,11 @@ public class Clause
 		return result;
 	}
 
+	/**
+	 * Two clauses are equal if they have the same collection of literals
+	 * @param o The object to check if this is equal
+	 * @return The result of the check
+	 */
 	public boolean equals(Object o)
 	{
 		if(!(o instanceof Clause))

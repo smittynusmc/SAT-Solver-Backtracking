@@ -12,23 +12,16 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
-/*
-//constructor
-formulaList = new ArrayList<Clause>(500);
-successState = new ArrayList <Literal> (500);
-numVariables = 0; //not sure how to use
-//automatic minClauseSize=Integer.MAX_VALUE;
-//automatic	minClauseIndex=-1;
-
-//variables
-private List<Clause> formulaList;  //yes
-private List <Literal> successState;  //yes
- ***** int lastIndex; //i think so, use to set literals for processing
-int numVariables; //I think this is currently unused
-int numClauses; //I think method is set to use formula size.
-boolean hasEmptyClause = false; //auto changed while adding clauses
-private int minClauseSize;  //auto changed while adding clauses
-private int minClauseIndex;  //auto changed while adding clauses
+/**
+ * A formula is a conjunction (and) of clauses, or a single clause
+ * The formula evaluates itself and returns true if satisfiable and false otherwise
+ * Recursively travels up and down the formula to solve the formula using backtracking
+ * 
+ * @author Adam Tucker
+ * @author Dennis Kluader
+ * @author Umair Chaudry
+ * @version 03/30/2016
+ *
  */
 
 public class Formula {
@@ -76,8 +69,7 @@ public class Formula {
 
 	/**
 	 * This method adds a clause to this formula
-	 * @param c a Clause
-	 * @return void
+	 * @param c The Clause to be added
 	 */
 	public void addClause(Clause c)
 	{
@@ -95,7 +87,11 @@ public class Formula {
 		}
 
 	}
-
+	
+	/**
+	 * Empty of the formula has been solved
+	 * @return True if the collection is empty and false otherwise
+	 */
 	public boolean isEmpty () {
 		return isEmpty;
 	}
@@ -107,13 +103,11 @@ public class Formula {
 	public int getNumVariables() 
 	{
 		return numVariables;
-		//use for keeping track of index?
 	}
 
 	/**
 	 * This method sets the number of variables in the formula
-	 * @param numVariables number of variables
-	 * @return void
+	 * @param numVariables The number of variables
 	 */
 	public void setNumVariables(int numVariables) 
 	{
@@ -128,48 +122,50 @@ public class Formula {
 	{
 		return formulaList.size();
 	}
-
+	
 	/**
-	 * This method sets the number of clauses in the formula
-	 * @param numClauses number of clauses
-	 * @return void
+	 * Gets the last index
+	 * @return The last index
 	 */
-	//public void setNumClauses(int numClauses) 
-	//{
-	//	this.numClauses = numClauses;
-	//}
-
 	public int getLastIndex() {
 		return lastIndex;
 	}
-
+	
+	/**
+	 * Sets the last index
+	 * @param lastIndex The integer last index will be set as
+	 */
 	public void setLastIndex(int lastIndex) {
 		this.lastIndex = lastIndex;
 	}
 
-
+	/**
+	 * Gets the success state
+	 * @return The success state
+	 */
 	public List<Literal> getSuccessState() {
 		Collections.sort(successState);
 		return successState;
 	}
-
-	public void removeLiteral (Formula f, int var) {
-		Literal temp = new Literal (var);
-		for (Clause myClauses: formulaList) {
-			myClauses.evaluateClause(temp);
-		}
-	}
-
+	
+	/**
+	 * Recursive backtracking call to solve the formula
+	 * @return True if the formula is satisfiable and false otherwise
+	 */
 	public boolean runSolver()
 	{
+		//Base case if empty formula is satisfiable
 		if(this.isEmpty())
 		{
 			return true;			
 		}
+		//Base case 2 if there is empty clause backtrack through the tree
+		//to try different solutions
 		else if(this.hasEmptyClause)
 		{
 			return false;
 		}
+		//Recursive element
 		else{
 			Formula testTrue = createChild(true);
 			if(testTrue.runSolver())
@@ -191,7 +187,15 @@ public class Formula {
 			}
 		}
 	}
-
+	
+	/**
+	 * Creates a child formula to be tested by the solver
+	 * As the solver recursively travels through the collection
+	 * each new child will have a new formula evaluated by the create child method
+	 * @param givenBoolean The value to evaluate with the current formula
+	 * @return The new formula that has been evaluated at the current level
+	 * with any satisfied clause removed and unnecessary literal removed
+	 */
 	public Formula createChild(boolean givenBoolean)
 	{
 		//new formula with modified formula
@@ -223,8 +227,8 @@ public class Formula {
 
 	/**
 	 * This method loads and returns a formula from a file specification
-	 * @param filename name of the file containing the formula
-	 * @return the Formula
+	 * @param filename Name of the file containing the formula
+	 * @return The parsed Formula
 	 */
 	public static Formula readFromFile(String filename)
 	{
@@ -277,6 +281,10 @@ public class Formula {
 		return f;
 	}
 	
+	/**
+	 * Returns a string as {{1 true or 2 true} and (3 false and 4 false}}
+	 * @return The contents of the formula in a string format
+	 */
 	public String toString()
 	{
 		String result = "{ ";
